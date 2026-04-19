@@ -1,0 +1,145 @@
+Offline Weather App - Proje Dosya Ağacı
+========================================
+
+offline-weather-app/
+├── app/                                  # Uygulama rotaları (Expo Router)
+│   ├── (tabs)/                           # Tab navigasyonu
+│   │   ├── _layout.tsx                   # Tab layout (42 satır)
+│   │   ├── index.tsx                     # Ana sayfa (261 satır)
+│   │   ├── favorites.tsx                 # Favoriler sayfası (136 satır)
+│   │   ├── settings.tsx                  # Ayarlar sayfası (315 satır)
+│   │   └── explore.tsx                   # Explore sayfası (mevcut)
+│   ├── _layout.tsx                       # Root layout (WeatherProvider ile)
+│   └── modal.tsx                         # Modal ekran
+│
+├── components/                           # Yeniden kullanılabilir bileşenler
+│   ├── WeatherCard.tsx                   # Hava durumu kartı (157 satır)
+│   ├── ForecastCard.tsx                  # Tahmin kartı (136 satır)
+│   ├── SearchBar.tsx                     # Arama çubuğu (82 satır)
+│   ├── external-link.tsx                 # Harici bağlantı
+│   ├── haptic-tab.tsx                    # Haptic tab
+│   ├── hello-wave.tsx                    # Merhaba dalgası
+│   ├── parallax-scroll-view.tsx          # Parallax scroll
+│   ├── themed-text.tsx                   # Tema metni
+│   ├── themed-view.tsx                   # Tema görünümü
+│   └── ui/                               # UI bileşenleri
+│       ├── icon-symbol.tsx               # İkon sembolü
+│       └── icon-symbol.ios.tsx           # iOS ikonları
+│
+├── context/                              # React Context
+│   └── WeatherContext.tsx                # Hava durumu context ve provider (151 satır)
+│
+├── data/                                 # Statik veri
+│   └── weatherData.ts                    # Offline hava durumu verileri (436 satır)
+│       ├── 5 Türk şehri
+│       ├── Güncel hava durumu
+│       ├── 5 günlük tahmin
+│       └── Emoji hava simgeleri
+│
+├── services/                             # İş mantığı servisleri
+│   └── weatherService.ts                 # Hava durumu servisi (164 satır)
+│       ├── getAllCities()
+│       ├── getCityWeather()
+│       ├── searchCities()
+│       ├── getFavoriteCities()
+│       ├── addFavorite()
+│       ├── removeFavorite()
+│       └── Birim dönüştürme fonksiyonları
+│
+├── constants/                            # Sabitler
+│   └── theme.ts                          # Tema sabitleri
+│
+├── hooks/                                # Custom React hooks
+│   ├── use-color-scheme.ts               # Renk şeması hook
+│   ├── use-color-scheme.web.ts           # Web renk şeması
+│   └── use-theme-color.ts                # Tema rengi hook
+│
+├── assets/                               # Görseller ve ikonlar
+│   ├── images/                           # Resim dosyaları
+│   │   ├── icon.png
+│   │   ├── splash-icon.png
+│   │   ├── favicon.png
+│   │   └── android-icon-*
+│   └── fonts/                            # Font dosyaları
+│
+├── .vscode/                              # VS Code ayarları
+│   ├── extensions.json
+│   └── settings.json
+│
+├── .git/                                 # Git repository
+│
+├── node_modules/                         # Bağımlılıklar (491 MB)
+│
+├── package.json                          # Proje konfigürasyonu
+├── package-lock.json                     # Bağımlılık kilidi
+├── tsconfig.json                         # TypeScript konfigürasyonu
+├── eslint.config.js                      # ESLint konfigürasyonu
+├── app.json                              # Expo konfigürasyonu
+│
+├── README.md                             # İngilizce README
+├── README_TR.md                          # Türkçe dokümantasyon (6.3 KB)
+├── DEPLOYMENT.md                         # Dağıtım kılavuzu (5.5 KB)
+├── PROJECT_SUMMARY.md                    # Proje özeti (9.4 KB)
+└── PROJECT_TREE.txt                      # Bu dosya
+
+========================================
+İstatistikler:
+========================================
+- Toplam TypeScript dosyaları: 26
+- Özel geliştirilen dosyalar: 11
+- Toplam satır kodu: ~2,200
+- Proje boyutu (node_modules hariç): 2.4 MB
+- Proje boyutu (node_modules dahil): 491 MB
+- Lint hataları: 0
+- Lint uyarıları: 0
+
+========================================
+Temel Özellikler:
+========================================
+✅ Çevrimdışı çalışma
+✅ 5 şehir hava durumu verisi
+✅ 5 günlük tahmin
+✅ Favori şehirler
+✅ Şehir arama
+✅ Birim dönüştürme
+✅ Ayarlar yönetimi
+✅ AsyncStorage depolama
+✅ Modern UI/UX
+✅ TypeScript tip güvenliği
+✅ Responsive tasarım
+✅ Tab navigasyonu
+
+========================================
+Ekranlar:
+========================================
+1. Ana Sayfa (Home)
+   - Seçili şehrin hava durumu
+   - 5 günlük tahmin
+   - Diğer şehirler listesi
+   - Arama çubuğu
+
+2. Favoriler (Favorites)
+   - Kaydedilen şehirler
+   - Hızlı erişim
+   - Favorilerden çıkarma
+
+3. Ayarlar (Settings)
+   - Sıcaklık birimi seçimi
+   - Rüzgar hızı birimi seçimi
+   - Cache temizleme
+   - Favorileri temizleme
+   - Uygulama bilgileri
+
+========================================
+Teknoloji Stack:
+========================================
+- React Native 0.81.5
+- Expo 54.0.33
+- TypeScript 5.9.2
+- React 19.1.0
+- Expo Router 6.0.23
+- React Navigation 7.1.8
+- AsyncStorage 1.x
+- React Native SVG
+
+========================================

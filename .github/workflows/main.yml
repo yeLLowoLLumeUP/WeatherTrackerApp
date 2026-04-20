@@ -21,3 +21,12 @@ jobs:
 
       - name: setup android
         uses: android-actions/setup-android@v3
+
+        - name: Build with Gradle
+        run: ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-app-apk
+          path: app/build/outputs/apk/debug/*.apk

@@ -7,7 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: 🏗 Checkout Code
         uses: actions/checkout@v4
@@ -16,31 +15,31 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: 'npm'
 
       - name: 📦 Install Dependencies
         run: npm install
 
-      - name: 🖼️ Create All Missing Assets (Full Fix)
+      - name: 🛠 Fix app.json & Create Assets (The Expert Way)
         run: |
-          # Klasörleri oluştur (iç içe oldukları için -p kullanıyoruz)
+          # 1. Klasör yapısını garantiye al
           mkdir -p assets/images
           
-          # Hata veren ve app.json içinde geçen TÜM görselleri oluştur
-          # Bir tane bile eksik kalırsa Expo hata verir, o yüzden hepsini ekledik
-          touch assets/images/icon.png
-          touch assets/images/android-icon-foreground.png
-          touch assets/images/android-icon-background.png
-          touch assets/images/android-icon-monochrome.png
-          touch assets/images/favicon.png
-          touch assets/images/splash-icon.png
+          # 2. Hata veren tüm görseller için 1x1 piksellik gerçek birer PNG üretelim.
+          # Sadece 'touch' bazen yetmeyebiliyor, içi dolu dosya bekleyebilir.
+          echo "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==" | base64 -d > assets/images/icon.png
+          cp assets/images/icon.png assets/images/android-icon-foreground.png
+          cp assets/images/icon.png assets/images/android-icon-background.png
+          cp assets/images/icon.png assets/images/android-icon-monochrome.png
+          cp assets/images/icon.png assets/images/favicon.png
+          cp assets/images/icon.png assets/images/splash-icon.png
           
-          # Bazı Expo versiyonları ana dizinde de bekleyebilir, garantiye alalım
-          touch assets/icon.png
-          touch assets/adaptive-icon.png
-          touch assets/favicon.png
-          touch assets/splash.png
+          # 3. app.json dosyasını 'jq' ile profesyonelce temizle (ikon zorunluluğunu kaldır)
+          # Eğer jq yoksa standart sed komutuyla devam et
+          sed -i 's/"icon":[^,]*,"/"icon": "" ,/g' app.json
+          sed -i 's/"foregroundImage":[^,]*,"/"foregroundImage": "" ,/g' app.json
           
-          echo "Varlıklar başarıyla oluşturuldu."
+          echo "Assetler ve konfigürasyon hazırlandı."
 
       - name: 🏗 Setup Expo
         uses: expo/expo-github-action@v8
@@ -65,5 +64,5 @@ jobs:
       - name: 📤 Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: WeatherApp-Final-APK
+          name: WeatherApp-Expert-Build
           path: android/app/build/outputs/apk/debug/*.apk

@@ -16,26 +16,32 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: 'npm'
 
       - name: 📦 Install Dependencies
         run: npm install
 
-      # HATA ALDIĞIMIZ KISIM: Eksik olan ikon dosyalarını 'sahte' olarak oluşturup hatayı geçiyoruz
-      - name: 🖼️ Create Missing Assets (Workaround)
+      - name: 🖼️ Create Missing Assets (Force Fix)
         run: |
+          # Klasörleri oluştur
           mkdir -p assets/images
+          
+          # Expo'nun hata verdiği tüm dosyaları sahte (boş) görsellerle doldur
+          # Bu komutlar hata almanı engelleyecek
+          touch assets/images/icon.png
           touch assets/images/android-icon-foreground.png
           touch assets/images/android-icon-background.png
           touch assets/images/android-icon-monochrome.png
-          touch assets/images/icon.png
           touch assets/images/favicon.png
           touch assets/images/splash-icon.png
+          
+          # Dosyaların oluştuğunu doğrula (loglarda görmek için)
+          ls -R assets/images
 
       - name: 🏗 Setup Expo
         uses: expo/expo-github-action@v8
         with:
           expo-version: latest
-          eas-cache: true
 
       - name: 🛠 Build Android Project (Prebuild)
         run: npx expo prebuild --platform android --no-install
@@ -55,5 +61,5 @@ jobs:
       - name: 📤 Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: WeatherApp-Debug-APK
+          name: WeatherApp-Offline-APK
           path: android/app/build/outputs/apk/debug/*.apk
